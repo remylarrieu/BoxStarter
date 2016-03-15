@@ -1,0 +1,69 @@
+# Boxstarter options
+$Boxstarter.RebootOk=$true # Allow reboots?
+$Boxstarter.NoPassword=$false # Is this a machine with no login password?
+$Boxstarter.AutoLogin=$true # Save my password securely and auto-login after a reboot
+
+# Basic setup
+Update-ExecutionPolicy Unrestricted
+Set-ExplorerOptions -showFileExtensions
+Enable-RemoteDesktop
+Set-TaskbarSmall
+
+if (Test-PendingReboot) { Invoke-Reboot }
+
+# Update Windows and reboot if necessary
+Install-WindowsUpdate -AcceptEula
+if (Test-PendingReboot) { Invoke-Reboot }
+
+# Install Visual Studio 2015 Community 
+cinstm visualstudio2015community -InstallArguments WebTools
+if (Test-PendingReboot) { Invoke-Reboot }
+
+cinstm DotNet3.5
+if (Test-PendingReboot) { Invoke-Reboot }
+cinstm DotNet4.0
+if (Test-PendingReboot) { Invoke-Reboot }
+cinstm DotNet4.5.2
+if (Test-PendingReboot) { Invoke-Reboot }
+cinstm DotNet4.6
+if (Test-PendingReboot) { Invoke-Reboot }
+
+# VS extensions
+Install-ChocolateyVsixPackage PowerShellTools http://visualstudiogallery.msdn.microsoft.com/c9eb3ba8-0c59-4944-9a62-6eee37294597/file/112013/6/PowerShellTools.vsix
+Install-ChocolateyVsixPackage WebEssentials2015 http://visualstudiogallery.msdn.microsoft.com/56633663-6799-41d7-9df7-0f2a504ca361/file/105627/31/WebEssentials2013.vsix
+
+#Other dev tools
+cinst visualstudiocode
+cinst sqlserver2014express
+
+
+#Browser
+cinst googlechrome
+
+#Other AETS tools
+cinst 7zip
+cinst ccleaner
+cinst malwarebytes
+cinst skypeforbusiness
+cinst skype
+
+#Other essential tools
+cinst f.lux
+cinst keepass.install
+cinst wunderlist
+cinst putty
+cinst paint.net
+cinst zoomit
+cinst adobereader
+cinst filezilla
+cinst winscp
+cinst teamviewer
+
+cinst Microsoft-Hyper-V-All -source windowsFeatures
+cinst IIS-WebServerRole -source windowsfeatures
+cinst IIS-HttpCompressionDynamic -source windowsfeatures
+cinst IIS-ManagementScriptingTools -source windowsfeatures
+cinst IIS-WindowsAuthentication -source windowsfeatures
+
+Install-ChocolateyPinnedTaskBarItem "$($Boxstarter.programFiles86)\Google\Chrome\Application\chrome.exe"
+Install-ChocolateyPinnedTaskBarItem "$($Boxstarter.programFiles86)\Microsoft Visual Studio 14.0\Common7\IDE\devenv.exe"

@@ -5,7 +5,7 @@ $Boxstarter.AutoLogin=$true # Save my password securely and auto-login after a r
 
 # Basic setup
 Update-ExecutionPolicy Unrestricted
-Set-WindowsExplorerOptions -showFileExtensions
+Set-WindowsExplorerOptions -EnableShowFileExtension
 Enable-RemoteDesktop
 
 # Update Windows and reboot if necessary
@@ -13,16 +13,16 @@ Install-WindowsUpdate -AcceptEula
 if (Test-PendingReboot) { Invoke-Reboot }
 
 # Install Visual Studio 2015 Community 
-cinstm visualstudio2015community -InstallArguments WebTools
+cinst visualstudio2015community -InstallArguments WebTools
 if (Test-PendingReboot) { Invoke-Reboot }
 
-cinstm DotNet3.5
+cinst DotNet3.5
 if (Test-PendingReboot) { Invoke-Reboot }
-cinstm DotNet4.0
+cinst DotNet4.0
 if (Test-PendingReboot) { Invoke-Reboot }
-cinstm DotNet4.5.2
+cinst DotNet4.5.2
 if (Test-PendingReboot) { Invoke-Reboot }
-cinstm DotNet4.6
+cinst DotNet4.6
 if (Test-PendingReboot) { Invoke-Reboot }
 
 # VS extensions
@@ -32,7 +32,6 @@ Install-ChocolateyVsixPackage WebEssentials2015 http://visualstudiogallery.msdn.
 #Other dev tools
 cinst visualstudiocode
 cinst sqlserver2014express
-
 
 #Browser
 cinst googlechrome

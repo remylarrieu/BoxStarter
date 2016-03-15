@@ -5,11 +5,8 @@ $Boxstarter.AutoLogin=$true # Save my password securely and auto-login after a r
 
 # Basic setup
 Update-ExecutionPolicy Unrestricted
-Set-ExplorerOptions -showFileExtensions
+Set-WindowsExplorerOptions -showFileExtensions
 Enable-RemoteDesktop
-Set-TaskbarSmall
-
-if (Test-PendingReboot) { Invoke-Reboot }
 
 # Update Windows and reboot if necessary
 Install-WindowsUpdate -AcceptEula

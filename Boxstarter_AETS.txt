@@ -15,10 +15,6 @@ if (Test-PendingReboot) { Invoke-Reboot }
 #Installation of ChocolateyPinnedTaskBarItem
 iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))
 
-# Install Visual Studio 2015 Community
-cinst visualstudio2015community -InstallArguments WebTools
-if (Test-PendingReboot) { Invoke-Reboot }
-
 cinst DotNet3.5
 if (Test-PendingReboot) { Invoke-Reboot }
 cinst DotNet4.0

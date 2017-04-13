@@ -25,8 +25,6 @@ cinst DotNet4.0
 if (Test-PendingReboot) { Invoke-Reboot }
 cinst DotNet4.5.2
 if (Test-PendingReboot) { Invoke-Reboot }
-cinst DotNet4.6
-if (Test-PendingReboot) { Invoke-Reboot }
 
 #Browser
 cinst googlechrome
@@ -38,9 +36,3 @@ cinst malwarebytes
 cinst skypeforbusinessbasic
 cinst skype
 cinst agentransack
-
-cinst Microsoft-Hyper-V-All -source windowsFeatures
-cinst IIS-WebServerRole -source windowsfeatures
-cinst IIS-HttpCompressionDynamic -source windowsfeatures
-cinst IIS-ManagementScriptingTools -source windowsfeatures
-cinst IIS-WindowsAuthentication -source windowsfeatures

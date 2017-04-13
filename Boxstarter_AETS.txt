@@ -4,17 +4,17 @@ $Boxstarter.NoPassword=$false # Is this a machine with no login password?
 $Boxstarter.AutoLogin=$true # Save my password securely and auto-login after a reboot
 
 # Basic setup
-Set-WindowsExplorerOptions -EnableShowFileExtension
-Enable-RemoteDesktop
+Set-WindowsExplorerOptions -EnableShowFileExtension -DisableOpenFileExplorerToQuickAccess
+Set-TaskbarOptions -AlwaysShowIconsOn
 
 # Update Windows and reboot if necessary
 Install-WindowsUpdate -AcceptEula
 if (Test-PendingReboot) { Invoke-Reboot }
 
-#Browser
+# Browser
 cinst googlechrome
 
-#Other AETS tools
+# AETS tools
 cinst 7zip
 cinst ccleaner
 cinst malwarebytes

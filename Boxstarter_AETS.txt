@@ -1,0 +1,46 @@
+# Boxstarter options
+$Boxstarter.RebootOk=$true # Allow reboots?
+$Boxstarter.NoPassword=$false # Is this a machine with no login password?
+$Boxstarter.AutoLogin=$true # Save my password securely and auto-login after a reboot
+
+# Basic setup
+Update-ExecutionPolicy Unrestricted
+Set-WindowsExplorerOptions -EnableShowFileExtension
+Enable-RemoteDesktop
+
+# Update Windows and reboot if necessary
+Install-WindowsUpdate -AcceptEula
+if (Test-PendingReboot) { Invoke-Reboot }
+
+#Installation of ChocolateyPinnedTaskBarItem
+iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))
+
+# Install Visual Studio 2015 Community
+cinst visualstudio2015community -InstallArguments WebTools
+if (Test-PendingReboot) { Invoke-Reboot }
+
+cinst DotNet3.5
+if (Test-PendingReboot) { Invoke-Reboot }
+cinst DotNet4.0
+if (Test-PendingReboot) { Invoke-Reboot }
+cinst DotNet4.5.2
+if (Test-PendingReboot) { Invoke-Reboot }
+cinst DotNet4.6
+if (Test-PendingReboot) { Invoke-Reboot }
+
+#Browser
+cinst googlechrome
+
+#Other AETS tools
+cinst 7zip
+cinst ccleaner
+cinst malwarebytes
+cinst skypeforbusinessbasic
+cinst skype
+cinst agentransack
+
+cinst Microsoft-Hyper-V-All -source windowsFeatures
+cinst IIS-WebServerRole -source windowsfeatures
+cinst IIS-HttpCompressionDynamic -source windowsfeatures
+cinst IIS-ManagementScriptingTools -source windowsfeatures
+cinst IIS-WindowsAuthentication -source windowsfeatures

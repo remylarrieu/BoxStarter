@@ -4,22 +4,11 @@ $Boxstarter.NoPassword=$false # Is this a machine with no login password?
 $Boxstarter.AutoLogin=$true # Save my password securely and auto-login after a reboot
 
 # Basic setup
-Update-ExecutionPolicy Unrestricted
 Set-WindowsExplorerOptions -EnableShowFileExtension
 Enable-RemoteDesktop
 
 # Update Windows and reboot if necessary
 Install-WindowsUpdate -AcceptEula
-if (Test-PendingReboot) { Invoke-Reboot }
-
-#Installation of ChocolateyPinnedTaskBarItem
-iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))
-
-cinst DotNet3.5
-if (Test-PendingReboot) { Invoke-Reboot }
-cinst DotNet4.0
-if (Test-PendingReboot) { Invoke-Reboot }
-cinst DotNet4.5.2
 if (Test-PendingReboot) { Invoke-Reboot }
 
 #Browser
